@@ -11,99 +11,9 @@ const inquirer = require("inquirer");
 
 
 const team = [];
-
-const addManager = () => {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'What is the name of the manager for this team?',
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                }else {
-                    console.log("Please enter a name");
-                    return false;
-                }
-            }
-            
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Please enter the manager ID',
-            validate: idInput => {
-                if (idInput) {
-                    return true;
-                }else {
-                    console.log("Please enter an ID");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Please enter the managers email',
-            validate: emailInput => {
-                if (emailInput) {
-                    return true;
-                }else {
-                    console.log("Please enter an email address");
-                    return false;
-                }
-
-            }
-        },
-        {
-            type: 'input',
-            name: 'officeNumber',
-            message: 'Please enter the managers office number',
-            validate: officeInput => {
-                if (officeInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the managers office number");
-                    return false;
-                }
-            }
-        },
-        {
-            type:'list',
-            name: 'newMember',
-            message: 'What type of employee would you like to add?',
-            choices: ['Engineer','Intern', 'No more employees to add'],
-            
-        }
-
-    ]) 
-    .then((managerInput) => {
-        const {name,id,email,officeNumber,newMember} = managerInput;
-        const manager = new Manager (name,id,email,officeNumber)
-        team.push(manager)
-        // if(managerInput.newMember === "Engineer") {
-        //     engineerQues();
-        // } else if (managerInput.newMember === "Intern"){
-        //     internQues();
-        // }else{
-        //     writeToFile('dist/index.html', generateTeam(teamArr))
-        // }
-        switch(newMember) {
-            case 'Engineer':
-                engineerQues();
-                break;
-            case 'Intern' :
-                internQues();
-                break;
-            default:
-                writeToFile('dist/index.html', pageTemplate(team))
-        }
-    })
-    
-};
 const engineerQues = () => {
     return inquirer.prompt ([
-        ,
+        
         {
             type: 'input',
             name: 'name',
@@ -183,6 +93,179 @@ const engineerQues = () => {
 
     })
 }
+
+const addManager = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the name of the manager for this team?',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                }else {
+                    console.log("Please enter a name");
+                    return false;
+                }
+            }
+            
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Please enter the manager ID',
+            validate: idInput => {
+                if (idInput) {
+                    return true;
+                }else {
+                    console.log("Please enter an ID");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Please enter the managers email',
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                }else {
+                    console.log("Please enter an email address");
+                    return false;
+                }
+
+            }
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'Please enter the managers office number',
+            validate: officeInput => {
+                if (officeInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the managers office number");
+                    return false;
+                }
+            }
+        },
+        {
+            type:'list',
+            name: 'newMember',
+            message: 'What type of employee would you like to add?',
+            choices: ['Engineer','Intern', 'No more employees to add'],
+            
+        }
+
+    ]) 
+    .then((managerInput) => {
+        const {name,id,email,officeNumber,newMember} = managerInput;
+        const manager = new Manager (name,id,email,officeNumber)
+        team.push(manager)
+        console.log(newMember);
+        if(newMember === 'Engineer') {
+            engineerQues();
+        } else if (newMember === 'Intern'){
+             internQues();
+        }else{
+            writeToFile('dist/index.html', pageTemplate(team))
+        }
+        // switch(newMember) {
+        //     case 'Engineer':
+        //         engineerQues();
+        //         break;
+        //     case 'Intern' :
+        //         internQues();
+        //         break;
+        //     default:
+        //         writeToFile('dist/index.html', pageTemplate(team))
+        // }
+    })
+    
+};
+// const engineerQues = () => {
+//     return inquirer.prompt ([
+        
+//         {
+//             type: 'input',
+//             name: 'name',
+//             message: 'What is the name of the engineer?',
+//             validate: nameInput => {
+//                 if (nameInput) {
+//                     return true;
+//                 } else {
+//                     console.log('Please enter a name');
+//                     return false;
+//                 }
+//             }
+            
+//         },
+//         {
+//             type: 'input',
+//             name: 'id',
+//             message: 'Please enter the employee Id of the engineer',
+//             validate: idInput => {
+//                 if (idInput) {
+//                     return true;
+//                 } else {
+//                     console.log('Please enter an ID');
+//                     return false;
+//                 }
+//             }
+//         },
+//         {
+//             type: 'input',
+//             name: 'email',
+//             message: 'Please enter the engineer\'s email address',
+//             validate: emailInput => {
+//                 if (emailInput) {
+//                     return true;
+//                 } else {
+//                     console.log('Please enter an email address');
+//                     return false;
+//                 }
+//             }
+//         },
+//         {
+//             type: 'input',
+//             name: 'github',
+//             message: 'Please enter the engineer\'s GitHub username',
+//             validate: gitHubInput => {
+//                 if(gitHubInput){
+//                     return true;
+//                 }else {
+//                     console.log("Please enter a username");
+//                     return false;
+//                 }
+//             }
+//         },
+//         {
+//             type:'list',
+//             name: 'newMember',
+//             message: 'What type of employee would you like to add?',
+//             choices: ['Engineer','Intern', 'No more employees to add'],
+            
+//         }
+
+//     ])
+//     .then(engineerInput => {
+//         const {name,id,email,github,newMember} = engineerInput;
+//         const engineer = new Engineer (name,id,email,github);
+//         team.push(engineer);
+//         switch(newMember) {
+//             case 'Engineer':
+//                 engineerQues();
+//                 break;
+//             case 'Intern' :
+//                 internQues();
+//                 break;
+//             default:
+//                 writeToFile('dist/index.html', pageTemplate(team))
+//         }
+
+//     })
+// }
 const internQues = () => {
     return inquirer.prompt ([
         ,
