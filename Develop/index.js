@@ -5,9 +5,7 @@ const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 const fs = require("fs");
 const inquirer = require("inquirer");
-// const { isBuffer } = require("lodash");
-// const { validationCondition } = require("jest-validate/build/condition");
-// const { validate } = require("@babel/types");
+
 
 
 const team = [];
@@ -81,24 +79,16 @@ const addManager = () => {
         const {name,id,email,officeNumber,newMember} = managerInput;
         const manager = new Manager (name,id,email,officeNumber)
         team.push(manager)
-        console.log(newMember);
-        if(newMember === 'Engineer') {
-            engineerQues();
-        } else if (newMember === 'Intern'){
-             internQues();
-        }else{
-            writeToFile('dist/index.html', pageTemplate(team))
+        switch(newMember) {
+            case 'Engineer':
+                engineerQues();
+                break;
+            case 'Intern' :
+                internQues();
+                break;
+            default:
+                writeToFile('dist/index.html', pageTemplate(team))
         }
-        // switch(newMember) {
-        //     case 'Engineer':
-        //         engineerQues();
-        //         break;
-        //     case 'Intern' :
-        //         internQues();
-        //         break;
-        //     default:
-        //         writeToFile('dist/index.html', pageTemplate(team))
-        // }
     })
     
 };
@@ -186,7 +176,7 @@ const engineerQues = () => {
 }
 const internQues = () => {
     return inquirer.prompt ([
-        ,
+        
         {
             type: 'input',
             name: 'name',

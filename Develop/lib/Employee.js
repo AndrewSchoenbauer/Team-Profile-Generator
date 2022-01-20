@@ -17,8 +17,5 @@ class Employee {
     getRole() {
         return 'Employee'
     }
-    // getOfficeNumber() {
-    //     return this.officeNumber;
-    // }
 }
 module.exports = Employee
